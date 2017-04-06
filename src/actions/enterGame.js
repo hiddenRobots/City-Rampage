@@ -33,16 +33,3 @@ export const leaveGame = uid => (dispatch) => {
   });
 };
 
-
-// will talk to a reducer that tells sets the player into the game
-
-// export const startListeningForPlayers = () => {
-//   (dispatch) => {
-//     gameRef.on('value', (snapshot) => {
-//       dispatch();
-//     });
-//   };
-// };
-
-// add a const object that contains all of the actions
-

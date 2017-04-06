@@ -1,7 +1,7 @@
 export default function (state = [], action) {
   switch (action.type) {
     case 'START_GAME':
-      return action.user;
+      return action.playerArr;
     default:
       return state;
   }
