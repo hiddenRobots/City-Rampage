@@ -6,15 +6,9 @@ class Deck extends Component {
     this.cardStyle = { margin: '10px', width: '100px', height: '100px', border: '1px solid black', float: 'left' };
   }
 
-  test(e, card) {
-    console.log('in test market method', card);
-    this.props.buyCard(card);
-    this.props.addToHand();
-  }
-
   createMarket() {
     return this.props.market.face_up.map(card => (
-      <div key={card.title} onClick={() => this.test(null, card)} className="market-card" style={this.cardStyle}>
+      <div key={card.title} onClick={() => this.props.buyCard(card, this.props.user)} className="market-card" style={this.cardStyle}>
         <div>{card.title}</div>
         <div>Cost: {card.cost}</div>
         <div>Effect: {card.ability}</div>
