@@ -1,8 +1,6 @@
 import firebase from 'firebase';
 import config from '../config.js';
 
-console.log(config);
-
 firebase.initializeApp(config);
 
 export default firebase;
