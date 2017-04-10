@@ -1,0 +1,23 @@
+* {
+  background-color: ghostwhite;
+}
+.nav-container {
+  height: 80px;
+  background-color: lightgray;
+}
+.nav-link {
+  float: left;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid beige;
+  border-radius: 5px;
+  background-color: beige;
+  text-decoration: none;
+  color: grey;
+  text-align: center;
+}
+.nav-link:hover {
+  background-color: darkcyan;
+  color: white;
+  border-color: darkcyan;
+}

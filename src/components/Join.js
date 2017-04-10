@@ -7,7 +7,7 @@ export default class Join extends React.Component {
   }
   render() {
     return (
-      // <div><StartGame /></div>
+      <div><StartGame /></div>
     );
   }
 }

@@ -1,29 +1,27 @@
 import React, { PropTypes } from 'react';
 import SignIn from './SignIn';
-import CurrentUser from '../containers/CurrentUserContainer';
 import Loading from './Loading';
-import DiceBox from '../containers/DiceBoxContainer';
-import Game from '../containers/GameContainer';
-import Market from '../containers/MarketContainer';
 import Home from './Home';
-
+import NewGame from '../containers/NewGameContainer';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import GamesList from '../containers/GamesListContainer';
+import '../Assets/App.css';
 
 const Application = ({ auth, signIn, signOut, game }) => (
   <Router>
     <main className="Application">
-      <div className="Application--sidebar">
-        {/* {auth.status == 'ANONYMOUS' ? <SignIn signIn={signIn}  /> : <div />}*/}
-        { auth.status === 'ANONYMOUS' && <SignIn signIn={signIn} /> }
-        { auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading /> }
+      <div>
+        <div className="nav-container">
+          { auth.status === 'ANONYMOUS' && <SignIn signIn={signIn} /> }
+          { auth.status === 'AWAITING_AUTH_RESPONSE' && <Loading /> }
+          <div><Link className="nav-link" to="/">Home</Link></div>
+          { auth.status === 'SIGNED_IN' && <div><Link className="nav-link" to="/newgame">New Game</Link></div> }
+          { auth.status === 'SIGNED_IN' && <div><Link className="nav-link" to="/gamesList">Games List</Link></div> }
+        </div>
 
-        { auth.status === 'SIGNED_IN' && <Home auth={auth} signOut={signOut} />}
-
-
-        {/* { auth.status === 'SIGNED_IN' && <CurrentUser auth={auth} signOut={signOut} />}
-      { auth.status !== 'ANONYMOUS' && <div><Game /><DiceBox /> <Market /></div>}*/}
-
-
+        <Route exact path="/" component={Home} />
+        { auth.status === 'SIGNED_IN' && <Route path="/newgame" component={NewGame} /> }
+        { auth.status === 'SIGNED_IN' && <Route path="/gamesList" component={GamesList} /> }
       </div>
     </main>
   </Router>

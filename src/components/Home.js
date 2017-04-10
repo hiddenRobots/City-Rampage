@@ -1,6 +1,4 @@
 import React from 'react';
-import GamesList from '../containers/GamesListContainer';
-import NewGame from '../containers/NewGameContainer';
 
 class Home extends React.Component {
   constructor(props) {
@@ -21,19 +19,7 @@ class Home extends React.Component {
     return (
 
       <div>
-        <h1> Hi {this.props.auth.displayName.split(' ')[0]}! </h1>
-
-        { test &&
-          <div>
-            <p><button>Continue Game</button></p>
-            <p><button onClick={() => { this.joinedClick(); }}>Join Game</button></p>
-            <p><button>New Game</button> </p>
-          </div>
-          }
-
-        <NewGame />
-
-        <GamesList />
+        <h1> Hi Player! </h1>
 
         <p><button onClick={() => { this.props.signOut(this.props.auth.uid); }}> Sign Out</button></p>
       </div>

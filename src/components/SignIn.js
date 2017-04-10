@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 
-
 const SignIn = ({ signIn }) => (
   <div className="SignIn">
     <button
