@@ -3,6 +3,7 @@ import { auth, database, googleAuthProvider } from '../firebase';
 import pick from 'lodash/pick';
 import { startListeningGameChanges } from './game';
 
+
 const usersRef = database.ref('users');
 
 export const signIn = () => (dispatch) => {

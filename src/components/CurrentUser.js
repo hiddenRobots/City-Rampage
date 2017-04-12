@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { database } from '../firebase';
-import User from './User';
+import map from 'lodash/map';
 
 class CurrentUser extends React.Component {
   constructor(props) {
@@ -9,6 +9,7 @@ class CurrentUser extends React.Component {
 
   render() {
     const { auth } = this.props;
+    console.log(this.props.playersOnline);
     return (
       <div className="CurrentUser">
         {/* <img
@@ -21,13 +22,16 @@ class CurrentUser extends React.Component {
           <p className="CurrentUser--email">{ auth.email }</p>
           {/* <button className="CurrentUser--signout"onClick={() => { signOut(auth.uid); }}> Sign Out</button>*/}
 
-          {this.props.playersOnline.map(user => <div key={user.uid}>{user.displayName}
-            <ul>
+          {map(this.props.playersOnline, (item, key) => <div>{item.displayName} {item.stats.health} {item.stats.energy} {item.stats.points}</div>)}
+          {/* {map(this.props.game.diceBox, (item, key) => <div className={item.selected ? 'dice-toggled' : 'dice'}onClick={() => this.props.selectDice(key)} key={key}>{item.val}</div>)}*/}
+
+          {/* {this.props.playersOnline.map(user => <div key={user.uid}>{user.displayName}*/}
+          {/* <ul>
               <li>energy {user.stats.energy}</li>
               <li>health {user.stats.health}</li>
               <li>points {user.stats.points}</li>
             </ul>
-          </div>)}
+          </div>)}*/}
 
 
           <button onClick={() => { this.props.increaseHealth(auth.uid); }} >up health</button>

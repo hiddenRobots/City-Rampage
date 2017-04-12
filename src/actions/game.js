@@ -3,6 +3,8 @@ import keys from 'lodash/keys';
 import filter from 'lodash/filter';
 import market from '../Cards/cards';
 
+import { startListeningForUsers } from './users';
+
 const startGameAction = gameData => ({
   type: 'START_GAME',
   gameData,
@@ -54,6 +56,7 @@ export const startGame = () => (dispatch, storeState) => {
     .then(() => {
       dispatch(initalizeOnGameStart());
       dispatch(setFirstPlayer());
+      dispatch(startListeningForUsers());
     });
 };
 
