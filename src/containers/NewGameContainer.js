@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import NewGame from '../components/NewGame';
 import { createNewGame } from '../actions/newGame';
+import { bindActionCreators } from 'redux';
 
 
 // function mapStateToProps(state) {
@@ -10,8 +11,16 @@ import { createNewGame } from '../actions/newGame';
 //   };
 // }
 
-const mapDispatchToProps = dispatch => ({
-  createNewGame(...args) { dispatch(createNewGame(...args)); },
-});
+// const mapDispatchToProps = dispatch => ({
+//   createNewGame(...args) { dispatch(createNewGame(...args)); },
+// });
 
-export default connect(mapDispatchToProps)(NewGame);
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      createNewGame,
+    },
+   dispatch);
+}
+
+export default connect(null, matchDispatchToProps)(NewGame);

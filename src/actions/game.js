@@ -2,9 +2,10 @@ import { database } from '../firebase';
 import keys from 'lodash/keys';
 import filter from 'lodash/filter';
 import market from '../Cards/cards';
+import { startListeningForUsers } from './users';
 
 const startGameAction = gameData => ({
-  type: 'START_GAME',
+  type: 'UPDATE_GAME_DATA',
   gameData,
 });
 
@@ -54,7 +55,19 @@ export const startGame = () => (dispatch, storeState) => {
     .then(() => {
       dispatch(initalizeOnGameStart());
       dispatch(setFirstPlayer());
+      dispatch(startListeningForUsers());
+    })
+    .then(() => {
+      game.once('value').then((data) => {
+        dispatch(startGameAction(data.val()));
+      });
     });
+};
+
+
+export const heyListen = () => (dispatch) => {
+  dispatch(startListeningForUsers());
+  dispatch(startListeningGameChanges());
 };
 
 
@@ -82,9 +95,10 @@ const setFirstPlayer = () => (dispatch, storeState) => {
 
 const initalizeOnGameStart = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
-  console.log(gid);
   const game = database.ref(`games/${gid}`);
 
+  game.child('started').set(true);
+  game.child('gid').set(gid);
   game.child('market').set(market);
   game.child('/rollCount').set(3);
   game.child('/king').set('none');
@@ -105,6 +119,7 @@ export const startListeningGameChanges = () => (dispatch, storeState) => {
   const game = database.ref(`games/${gid}`);
 
   game.on('value', (snapshot) => {
+    console.log('Listening for changes on startListeningGameChanges', snapshot.val());
     dispatch(startGameAction(snapshot.val()));
   });
 };

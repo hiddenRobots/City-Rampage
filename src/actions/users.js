@@ -8,16 +8,16 @@ export const addUser = user => ({
   photoURL: user.photoURL,
 });
 
-export const showOnlineUsersAction = () => ({
+export const showOnlineUsersAction = players => ({
   type: 'UPDATE_PLAYERS',
+  players,
 });
 
 export const startListeningForUsers = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
 
-  game.on('value', (snapshot) => {
-    // console.log('startListeningForUsers ', snapshot.val());
-    dispatch(showOnlineUsersAction());
+  game.child('/players').on('value', (players) => {
+    dispatch(showOnlineUsersAction(players.val()));
   });
 };

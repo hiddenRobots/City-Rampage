@@ -22,14 +22,13 @@ export default class NewGame extends React.Component {
     e.preventDefault();
 
     if (this.state.name !== '') {
-      console.log(this.state.name);
+      // console.log(this.state.name);
       this.props.createNewGame(this.state.name);
     }
   }
 
 
   render() {
-    // push new game and give it a name
     return (
       <div>
         <form onSubmit={this.submitInput}>

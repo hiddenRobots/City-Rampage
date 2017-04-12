@@ -3,6 +3,7 @@ import { auth, database, googleAuthProvider } from '../firebase';
 import pick from 'lodash/pick';
 import { startListeningGameChanges } from './game';
 
+
 const usersRef = database.ref('users');
 
 export const signIn = () => (dispatch) => {
@@ -48,7 +49,6 @@ export const startListeningToAuthChanges = () => (dispatch) => {
         });
         usersRef.child(user.uid).set(obj);
         dispatch(signedIn(obj));
-        console.log('GAME ID VAL', gameIdVal);
         dispatch(startListeningGameChanges());
       });
     } else {
