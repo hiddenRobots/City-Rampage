@@ -2,6 +2,7 @@ import { database } from '../firebase';
 import keys from 'lodash/keys';
 import filter from 'lodash/filter';
 import market from '../Cards/cards';
+import { startListeningForUsers } from './users';
 
 const startGameAction = gameData => ({
   type: 'START_GAME',
@@ -54,7 +55,13 @@ export const startGame = () => (dispatch, storeState) => {
     .then(() => {
       dispatch(initalizeOnGameStart());
       dispatch(setFirstPlayer());
+      dispatch(startListeningForUsers());
     });
+};
+
+
+export const heyListen = () => (dispatch) => {
+  dispatch(startListeningForUsers());
 };
 
 
@@ -82,9 +89,10 @@ const setFirstPlayer = () => (dispatch, storeState) => {
 
 const initalizeOnGameStart = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
-  console.log(gid);
   const game = database.ref(`games/${gid}`);
 
+  game.child('started').set(true);
+  game.child('gid').set(gid);
   game.child('market').set(market);
   game.child('/rollCount').set(3);
   game.child('/king').set('none');
@@ -105,6 +113,7 @@ export const startListeningGameChanges = () => (dispatch, storeState) => {
   const game = database.ref(`games/${gid}`);
 
   game.on('value', (snapshot) => {
+    console.log('Listening for changes on startListeningGameChanges', snapshot.val());
     dispatch(startGameAction(snapshot.val()));
   });
 };

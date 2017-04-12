@@ -8,7 +8,7 @@ import initialState from './initial-state';
 import Application from './containers/ApplicationContainer';
 
 import { startListeningToAuthChanges } from './actions/auth';
-import { startListeningForUsers } from './actions/users';
+// import { startListeningForUsers } from './actions/users';
 import { showOnlineUsersAction } from './actions/users';
 import { startListeningGameChanges } from './actions/game';
 
@@ -28,8 +28,8 @@ const store = createStore(
 
 
 store.dispatch(startListeningToAuthChanges());
-store.dispatch(startListeningForUsers());
-store.dispatch(showOnlineUsersAction());
+// store.dispatch(startListeningForUsers());
+// store.dispatch(showOnlineUsersAction());
 // store.dispatch(startListeningGameChanges());
 
 ReactDOM.render(

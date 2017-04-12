@@ -6,7 +6,6 @@ import { startGame, endTurn } from '../actions/game';
 const mapStateToProps = state => ({
   game: state.game,
   auth: state.auth,
-
 });
 
 const mapDispatchToProps = dispatch => ({

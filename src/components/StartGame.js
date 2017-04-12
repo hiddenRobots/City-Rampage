@@ -17,12 +17,12 @@ export default class StartGame extends React.Component {
   }
 
   render() {
-    // console./log(this.props, 'startGame component Is getting CRAY');
+    console.log(this.props, 'startGame component Is getting CRAY');
     return (
-      <div>{!this.state.started && <button onClick={() => { this.props.startGame(); this.handleStartGame(); }}>Start Game</button>}
+      <div>{!this.props.game.started && <button onClick={() => { this.props.startGame(); this.handleStartGame(); }}>Start Game</button>}
         {/* <div>Who's going? {this.props.game}</div>*/}
-
-        {this.state.started ? <div><Game /></div> : <div />}
+        {this.props.game.started ? this.props.heyListen() : null}
+        {this.props.game.started ? <div><Game /></div> : <div />}
         {/* <div><Game /></div>*/}
 
 

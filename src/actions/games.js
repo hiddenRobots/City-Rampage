@@ -29,13 +29,18 @@ export const grabListOfGames = () => (dispatch) => {
   });
 };
 
-export const joinGame = (uid, gid) => (dispatch) => {
-  database.ref(`users/${uid}/currentGame`).set(gid);
-// set in redux this value
-  dispatch(setGidtoAuth(gid));
+const updateGameData = gameData => ({
+  type: 'UPDATE_GAME_DATA',
+  gameData,
+});
 
-  const game = database.ref(`games/${gid}`);
-  game.child('/playerPosition').once('value')
+export const joinGame = (uid, gid) => (dispatch) => {
+  console.log('i as called');
+  database.ref(`users/${uid}/currentGame`).set(gid).then(() => {
+    dispatch(setGidtoAuth(gid));
+
+    const game = database.ref(`games/${gid}`);
+    game.child('/playerPosition').once('value')
   .then((PlayersInGame) => {
     if (!PlayersInGame.val()) {
       game.child('/playerPosition').set([uid]);
@@ -49,6 +54,14 @@ export const joinGame = (uid, gid) => (dispatch) => {
         }
       });
     }
+  });
+    return game;
+  }).then((game) => {
+    game.once('value').then((gameData) => {
+      console.log('Join Game', gameData.val());
+      const data = gameData.val();
+      dispatch(updateGameData(data));
+    });
   });
 };
 

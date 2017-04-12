@@ -1,8 +1,8 @@
 import { database } from '../firebase';
 
-export const createNewGame = (name, numPlayers = 4, gid = '') => {
-  console.log('i was called ', name);
-  database.ref('games').push(
+export const createNewGame = (name, numPlayers = 4) => {
+  const gid = database.ref('games').push().key;
+  database.ref(`games/${gid}`).set(
     {
       gid,
       numPlayers,

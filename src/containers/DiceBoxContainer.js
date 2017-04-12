@@ -6,7 +6,7 @@ const mapStateToProps = state => ({
   diceBox: state.diceBox,
   rollCount: state.rollCount,
   game: state.game,
-  auth: state.auth
+  auth: state.auth,
 });
 
 
@@ -15,6 +15,7 @@ const mapDispatchToProps = dispatch => ({
   selectDice(...args) { dispatch(selectDice(...args)); },
   submitRoll() { dispatch(submitRoll()); },
   endTurn() { dispatch(endTurn()); },
+
 });
 
 
