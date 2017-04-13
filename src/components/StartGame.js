@@ -10,6 +10,7 @@ export default class StartGame extends React.Component {
   }
   componentDidMount() {
     this.props.heyListen();
+    // this.props.marketListener();
   }
   handleStartGame() {
     // console.log('started the game');

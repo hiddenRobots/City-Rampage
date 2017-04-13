@@ -5,12 +5,14 @@ import fire from '../Cards/effects';
 // gameRef later will set the game-hash-id dynamically
 
 function firebaseFix(obj) {
+  console.log('firebaseFix');
   obj.deck = obj.deck || [];
   obj.face_up = obj.face_up || [];
   obj.discarded = obj.discarded || [];
 }
 
 function regenDeckIfEmpty(obj) {
+  console.log('regenDeckIfEmpty');
   if (!obj.deck || obj.deck.length === 0) {
     obj.deck = [];
     obj.deck = shuffle(obj.discarded);
@@ -19,6 +21,7 @@ function regenDeckIfEmpty(obj) {
 }
 
 function dealCard(obj) {
+  console.log('dealCard');
   obj.face_up.push(obj.deck[0]);
   obj.deck.shift();
 }
@@ -72,5 +75,16 @@ export const resetMarket = () => (dispatch, storeState) => {
     }
     game.child('market').set(market)
     .then(() => dispatch({ type: 'DEAL_NEW_MARKET', payload: market }));
+  });
+};
+
+export const marketListener = () => (dispatch, storeState) => {
+  const gid = storeState().auth.gid;
+  const game = database.ref(`games/${gid}`);
+
+  console.log(' in marketListener');
+
+  game.child('/market').on('value', (newMarket) => {
+    dispatch({ type: 'DEAL_NEW_MARKET', payload: newMarket.val() });
   });
 };
