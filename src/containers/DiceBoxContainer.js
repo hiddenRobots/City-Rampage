@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = dispatch => ({
-  rollDice() { dispatch(rollDice()); },
+  rollDice(...args) { dispatch(rollDice(...args)); },
   selectDice(...args) { dispatch(selectDice(...args)); },
   submitRoll() { dispatch(submitRoll()); },
   endTurn() { dispatch(endTurn()); },

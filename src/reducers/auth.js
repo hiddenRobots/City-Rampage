@@ -28,6 +28,11 @@ export default function authReducer(state = initialState.auth, action) {
         ...state,
         gid: action.gid,
       };
+    case 'REMOVE_GAME':
+      return {
+        ...state,
+        gid: '',
+      };
     default:
       return state;
   }

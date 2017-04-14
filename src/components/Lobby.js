@@ -1,21 +1,29 @@
 import React from 'react';
-import StartGame from './StartGame';
+import { Link } from 'react-router-dom';
+import StartGame from '../containers/StartGameContainer';
 
 export default class Lobby extends React.Component {
+
+  // componentWillMount() {
+  //   this.props.playersInLobby(this.props.gid);
+  // }
 
   render() {
     // console.log(this.props);
     return (
       <div>
-        Lobby!
+        <h3>Lobby: {this.props.game.name}</h3>
+        <h4>Players in lobby:</h4>
+        {this.props.lobby.map(person => <div key={person}> Name/ID: {person}</div>)}
         <button onClick={() => this.props.playersInLobby(this.props.gid)} >show me whos here!</button>
 
-        {/* show a list of players in the game */}
-        {this.props.lobby.map(person => <div key={person}>{person}</div>)}
-        {/* StartGame button in here*/}
-        {/* <button onClick={() => this.props.startGame()}>Start Game</button>*/}
-        <button onClick={() => { this.props.leaveGame(this.props.auth.uid); }}>Leave</button>
-        <StartGame heyListen={this.props.heyListen} game={this.props.game} startGame={this.props.startGame} />
+        <Link to="/games-list">
+          <button
+            onClick={() => { this.props.leaveGame(this.props.auth.uid); }}
+          >Leave</button>
+        </Link>
+
+        { this.props.game.gid === this.props.auth.gid && <StartGame />}
       </div>
     );
   }

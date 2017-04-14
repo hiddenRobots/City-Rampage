@@ -14,4 +14,3 @@ export const playersInLobby = gid => (dispatch) => {
     dispatch(setPlayersInLobby(playerList.val()));
   });
 };
-

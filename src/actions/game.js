@@ -3,6 +3,7 @@ import keys from 'lodash/keys';
 import filter from 'lodash/filter';
 import market from '../Cards/cards';
 import { startListeningForUsers } from './users';
+import { marketListener } from './market.js';
 
 const startGameAction = gameData => ({
   type: 'UPDATE_GAME_DATA',
@@ -14,6 +15,7 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
   .then((user) => {
     const playerObj = Object.assign({}, user.val(), {
       turnOrder: idx,
+      kingOnTurnStart: false,
       stats: {
         energy: 0,
         health: 10,
@@ -55,7 +57,7 @@ export const startGame = () => (dispatch, storeState) => {
     .then(() => {
       dispatch(initalizeOnGameStart());
       dispatch(setFirstPlayer());
-      dispatch(startListeningForUsers());
+      // dispatch(startListeningForUsers());
     })
     .then(() => {
       game.once('value').then((data) => {

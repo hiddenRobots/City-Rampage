@@ -5,7 +5,7 @@ import { playersInLobby } from '../actions/lobby';
 import { startGame } from '../actions/game';
 import { leaveGame } from '../actions/games';
 import { heyListen } from '../actions/game';
-
+import { marketListener } from '../actions/market';
 
 const mapStateToProps = state => ({
   lobby: state.lobby,
@@ -21,6 +21,7 @@ function matchDispatchToProps(dispatch) {
       startGame,
       leaveGame,
       heyListen,
+      marketListener,
     },
    dispatch);
 }
