@@ -26,8 +26,38 @@ font-family: 'Roboto', sans-serif;
   border-color: darkcyan;
 }
 
-.dice-toggled {
+/*.dice-toggled {
   width: 100px;
   background-color: #cdddf7;
   border-radius: 3px;
+}*/
+
+.dice {
+font-weight: bold;
+margin: 5px;
+box-shadow: grey -1px 3px 10px;
+align-items: center;
+justify-content: center;
+display: flex;
+width: 60px;
+font-size: 30px;
+border-radius: 8px;
+height: 60px;
+background-color: black;
+color: #F5A623
+}
+
+.dice-toggled {
+font-weight: bold;
+margin: 10px;
+box-shadow: grey -1px 3px 10px;
+align-items: center;
+justify-content: center;
+display: flex;
+width: 50px;
+font-size: 30px;
+border-radius: 8px;
+height: 50px;
+background-color: #BD0FE1;
+color: #F5A623
 }

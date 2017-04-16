@@ -35,6 +35,7 @@ class Market extends Component {
     return (
       <div>
         <div className="market-container">
+
           <div>
             <button
               id="reset-bttn"
@@ -63,9 +64,7 @@ class Market extends Component {
             <div>{this.props.market.discarded.length} cards</div>
           </div>
 
-
         </div>
-
       </div>
     );
   }

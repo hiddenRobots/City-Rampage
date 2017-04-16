@@ -1,13 +1,14 @@
 import { database } from '../firebase';
+import { gameSettings } from '../initial-state';
 
-export const createNewGame = (name, numPlayers = 4) => (dispatch)=> {
+export const createNewGame = (name, numPlayers = 4) => (dispatch) => {
   const gid = database.ref('games').push().key;
   database.ref(`games/${gid}`).set(
     {
       gid,
       numPlayers,
       name,
-      rollCount: 3,
+      rollCount: gameSettings.initialRolls,
       started: false,
       submitted: false,
       diceBox: {
@@ -19,5 +20,5 @@ export const createNewGame = (name, numPlayers = 4) => (dispatch)=> {
         six: { val: '?', selected: false },
       },
     });
-    dispatch({type:'ADD_USER',type:'poop'})
+  dispatch({ type: 'ADD_USER', type: 'user' });
 };

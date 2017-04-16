@@ -1,6 +1,5 @@
 import { database } from '../firebase';
 
-// const game = database.ref('games/aqwewq334');
 
 const updateGamesList = gamesList => ({
   type: 'UPDATE_GAMESLIST',
@@ -15,10 +14,9 @@ const setGidtoAuth = gid => ({
 
 export const grabListOfGames = () => (dispatch) => {
   database.ref('games').once('value').then((games) => {
-    // go thru each game and grab its id, name, and number of players,
-    // but check to make sure the game has not started
     const checkedGames = [];
     const gamesData = games.val();
+
     for (const i in gamesData) {
       if (gamesData[i].started === false) {
         const gameObj = { gid: i, name: gamesData[i].name };
@@ -35,18 +33,17 @@ const updateGameData = gameData => ({
 });
 
 export const joinGame = (uid, gid) => (dispatch) => {
-  // const game = database.ref(`games/${gid}`);
   let game = '';
 
-  // set gid on user
   database.ref(`users/${uid}/currentGame`).set(gid).then(() => {
-    dispatch(setGidtoAuth(gid));// works
+    dispatch(setGidtoAuth(gid));
   });
 
   database.ref(`games/${gid}`).once('value').then((gameData) => {
     game = database.ref(`games/${gameData.val().gid}`);
   }).then(() => {
     game.child('/playerPosition').once('value')
+
       .then((PlayersInGame) => {
         if (!PlayersInGame.val()) {
           game.child('/playerPosition').set([uid]);
@@ -54,7 +51,8 @@ export const joinGame = (uid, gid) => (dispatch) => {
           const newPlayers = [...PlayersInGame.val(), uid];
           game.child('/playerPosition').set(newPlayers);
         }
-      }).then(() => {
+      })
+      .then(() => {
         game.once('value').then((gameData) => {
           const data = gameData.val();
           dispatch(updateGameData(data));
@@ -83,7 +81,7 @@ export const leaveGame = uid => (dispatch, storeState) => {
       }).then(() => {
         game.child('/players').off();
         game.off();
-        game.child('/market').off()
+        game.child('/market').off();
         database.ref(`users/${uid}/currentGame`).set('');
       });
 

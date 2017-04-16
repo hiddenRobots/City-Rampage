@@ -10,7 +10,6 @@ export const playersInLobby = gid => (dispatch) => {
   const game = database.ref(`games/${gid}`);
 
   game.child('/playerPosition').once('value').then((playerList) => {
-    console.log(playerList.val());
     dispatch(setPlayersInLobby(playerList.val()));
   });
 };

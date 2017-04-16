@@ -39,7 +39,7 @@ export default class Game extends React.Component {
         {this.checkKing() && <KickKing />}
 
         <CurrentUser auth={this.props.auth} />
-        <DiceBox auth={this.props.auth} />
+        {/* <DiceBox auth={this.props.auth} />*/}
         <Market />
 
       </div>

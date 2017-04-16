@@ -2,6 +2,7 @@ import { database } from '../firebase';
 import groupBy from 'lodash/groupBy';
 import { changeStat } from './changeStat';
 import { setKing } from './kickKing';
+import { gameSettings } from '../initial-state';
 import fire from '../Cards/effects';
 
 const game = database.ref('games/aqwewq334');
@@ -24,7 +25,7 @@ const defaultDice = {
   six: { val: '?', selected: false },
 };
 
-const randNum = () => Math.floor((Math.random() * 6) + 1);
+const randNum = () => Math.ceil((Math.random() * 6));
 
 const updateRolls = listOfDice => ({
   type: 'UPDATE_DICEBOX',
@@ -56,11 +57,11 @@ export const rollDice = (uid, chosenId) => (dispatch, storeState) => {
   // if rollCount greater than 1, {decrement} else {submit}
     game.child('/rollCount').once('value').then((rollCount) => {
       if (rollCount.val() > 0) {
-      // gets the dice and changes each value
         game.child('/diceBox').once('value')
       .then((listOfDiceSnap) => {
         const listOfDice = listOfDiceSnap.val();
         const pArray = [];
+
         for (const i in listOfDice) {
           if (listOfDice[i].selected !== true) {
             pArray.push(game.child(`/diceBox/${i}`).set({ val: diceOptions[randNum()], selected: false }));
@@ -70,7 +71,6 @@ export const rollDice = (uid, chosenId) => (dispatch, storeState) => {
       }).then(() => {
         game.child('/diceBox').once('value').then((updatedDice) => {
           dispatch(updateRolls(updatedDice.val()));
-          // dispatch(decrementRoll().then(newRollCount => dispatch(updateRollCount(newRollCount))));
           dispatch(decrementRoll());
         });
       }).then(() => {
@@ -96,6 +96,7 @@ export const selectDice = (die, uid, chosenId) => (dispatch, storeState) => {
   if (uid == chosenId) {
     let valueOfSelected;
     let valueOfVal;
+
     game.child(`/diceBox/${die}`).once('value', (snapshot) => {
       valueOfSelected = snapshot.val().selected;
       valueOfVal = snapshot.val().val;
@@ -207,8 +208,8 @@ export const endTurn = () => (dispatch, storeState) => {
   const currentTurn = game.child('/currentTurn').once('value');
   const gameSize = game.child('/gameSize').once('value');
   Promise.all([currentTurn, gameSize])
-  .then((array) => {
-    const nextTurn = (array[0].val() + 1) % array[1].val();
+  .then(([currentTurn, gameSize]) => {
+    const nextTurn = (currentTurn.val() + 1) % gameSize.val();
     game.child('/currentTurn').set(nextTurn);
     return nextTurn;
   })
@@ -216,14 +217,14 @@ export const endTurn = () => (dispatch, storeState) => {
     game.child(`/playerPosition/${nextTurn}`).once('value')
     .then(playerID => game.child(`/players/${playerID.val()}`).once('value'))
     .then((player) => {
-      game.child('/rollCount').set(3);
+      game.child('/rollCount').set(gameSettings.initialRolls);
       game.child('/submitted').set(false);
       game.child('/diceBox').set(defaultDice);
       game.child('/chosenOne').set({ uid: player.val().uid, displayName: player.val().displayName });
       game.child('kingAttackedOnTurn').set(false);
 
       if (player.val().kingOnTurnStart) {
-        dispatch(changeStat(player.val().uid, 2, 'points'));
+        dispatch(changeStat(player.val().uid, gameSettings.startTurnKing, 'points'));
       }
     });
   });

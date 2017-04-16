@@ -1,5 +1,6 @@
 import { database } from '../firebase';
 import { changeStat } from './changeStat';
+import { gameSettings } from '../initial-state';
 
 export const setKing = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
@@ -10,7 +11,7 @@ export const setKing = () => (dispatch, storeState) => {
     game.child('/chosenOne').once('value')
     .then((currentPlayer) => {
       game.child('/king').set(currentPlayer.val())
-      .then(() => dispatch(changeStat(currentPlayer.val().uid, 1, 'points')));
+      .then(() => dispatch(changeStat(currentPlayer.val().uid, gameSettings.becomeKingPoints, 'points')));
       game.child(`/players/${currentPlayer.val().uid}/kingOnTurnStart`).set(true);
       game.child('kingAttackedOnTurn').set(false);
     });
