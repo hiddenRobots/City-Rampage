@@ -34,7 +34,8 @@ class Market extends Component {
   render() {
     return (
       <div>
-        <div className="market-container">
+        <div className="market-container" style={{ justifyContent: 'center' }}>
+
           <div>
             <button
               id="reset-bttn"
@@ -63,9 +64,7 @@ class Market extends Component {
             <div>{this.props.market.discarded.length} cards</div>
           </div>
 
-
         </div>
-
       </div>
     );
   }

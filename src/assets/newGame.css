@@ -1,0 +1,11 @@
+.new_game_form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 25px;
+  margin-left: 15px;
+}
+.name_input {
+  margin-left: 15px;
+  margin-right: 15px;
+}

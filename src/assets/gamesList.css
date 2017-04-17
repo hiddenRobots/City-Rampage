@@ -1,0 +1,35 @@
+.lobby_tiles_container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1px;
+}
+.lobby_tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: grey -1px 3px 12px; 
+  background: -webkit-linear-gradient(left top, cyan, #764893);
+  background: -o-linear-gradient(bottom right, cyan, #764893);
+  background: -moz-linear-gradient(bottom right, cyan, #764893); 
+  background: linear-gradient(to bottom right, cyan, #764893);
+  height: 175px;
+  width: 175px;
+  margin: 5px;
+}
+.lobby_tile > button {
+  display: flex;
+  margin-top: 15px;
+  padding: 8px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.room_name {
+  display: flex;
+  font-weight: bold;
+}
+.game_hash {
+  display: flex;
+  font-size: 10px;
+}

@@ -1,3 +1,5 @@
+import { gameSettings } from '../initial-state';
+
 const fire = {};
 
 // effects of cards with type = 'discard'
@@ -21,14 +23,18 @@ fire.super_saiyan = (consumer) => {
   consumer.stats.energy += 12;
 };
 
+fire.triple_bird = (consumer) => {
+  consumer.stats.health -= 3;
+  consumer.stats.points += 3;
+};
 // heal cards need to max health at 10
 fire.heal = (consumer) => {
-  const newHealth = Math.min(consumer.stats.health + 2, 10);
+  const newHealth = Math.min(consumer.stats.health + 2, gameSettings.maxHealth);
   consumer.stats.health = newHealth;
 };
 
 fire.miracle = (consumer) => {
-  const newHealth = Math.min(consumer.stats.health + 5, 10);
+  const newHealth = Math.min(consumer.stats.health + 5, gameSettings.maxHealth);
   consumer.stats.health = newHealth;
 };
 
@@ -52,6 +58,27 @@ fire.apocalypse = (consumer, room) => {
 
 fire.savant = () => {
   console.log('savant fired but not implemented!');
+};
+
+fire.siphon = (consumer, room) => {
+  if (consumer.uid === room.king.uid) {
+    const players = room.players;
+    let dmgDealt = 0;
+    for (const key in players) {
+      if (players[key].uid !== consumer.uid) {
+        players[key].stats.health -= 1;
+        dmgDealt += 1;
+      }
+    }
+    const newHealth = Math.min(consumer.stats.health + dmgDealt, gameSettings.maxHealth);
+    consumer.stats.health = newHealth;
+  }
+};
+fire.pax_romana = (consumer = null, room) => {
+  const players = room.players;
+  for (const key in players) {
+    players[key].stats.health = Math.min(players[key].stats.health += 3, gameSettings.maxHealth);
+  }
 };
 
 // effects of cards with type = 'keep'
@@ -80,8 +107,10 @@ fire.symbiosis_x = (consumer) => {
 };
 
 fire.symbiosis_z = (consumer) => {
-  consumer.stats.energy -= 1;
-  consumer.stats.health += 1;
+  if (consumer.stats.energy > 0 && consumer.stats.health < gameSettings.maxHealth) {
+    consumer.stats.energy -= 1;
+    consumer.stats.health += 1;
+  }
 };
 
 fire.symbiosis_super = (consumer) => {

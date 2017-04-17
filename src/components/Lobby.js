@@ -4,12 +4,7 @@ import StartGame from '../containers/StartGameContainer';
 
 export default class Lobby extends React.Component {
 
-  // componentWillMount() {
-  //   this.props.playersInLobby(this.props.gid);
-  // }
-
-  render() {
-    // console.log(this.props);
+  renderLobby() {
     return (
       <div>
         <h3>Lobby: {this.props.game.name}</h3>
@@ -22,6 +17,15 @@ export default class Lobby extends React.Component {
             onClick={() => { this.props.leaveGame(this.props.auth.uid); }}
           >Leave</button>
         </Link>
+      </div>
+    );
+  }
+
+  render() {
+    console.log(this.props);
+    return (
+      <div>
+        { this.props.game.started ? null : this.renderLobby() }
 
         { this.props.game.gid === this.props.auth.gid && <StartGame />}
       </div>
