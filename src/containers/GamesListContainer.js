@@ -7,7 +7,6 @@ function mapStateToProps(state) {
   return {
     gamesList: state.gamesList,
     auth: state.auth,
-    game: state.game,
   };
 }
 

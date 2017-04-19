@@ -1,5 +1,4 @@
 import { database } from '../firebase';
-import { gameSettings } from '../initial-state';
 
 export const changeStat = (uid, absChange = -5, stat = 'health') => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
@@ -11,7 +10,8 @@ export const changeStat = (uid, absChange = -5, stat = 'health') => (dispatch, s
     let currentStat = snapshot.val().stats[stat];
 
     currentStat += absChange;
-    if (stat === 'health') { currentStat = Math.min(currentStat, gameSettings.maxHealth); }
+    console.log('here is current stat', currentStat);
+    if (stat === 'health') { currentStat = Math.min(currentStat, 10); }
     return currentStat;
   }).then(currentStat => game.child(`players/${uid}/stats/${stat}`).set(currentStat));
 };

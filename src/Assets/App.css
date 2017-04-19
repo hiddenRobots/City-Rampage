@@ -1,80 +1,33 @@
 * {
 font-family: 'Roboto', sans-serif;
 }
-body {
-  background-image: url('http://img10.deviantart.net/c637/i/2009/131/2/a/city_destruction_by_fab68.jpg');
-  background-size: 100%;
-  background-repeat: repeat-y;
-}
 
 .nav-container {
   height: 80px;
-  box-shadow: grey -1px 3px 12px; 
-  background: #424242;
-  border-radius: 2px;
-  margin: 5px;
-  opacity: 0.9;
+  background-color: lightgray;
 }
 .nav-link {
   float: left;
   margin: 20px;
   padding: 10px;
-  border: 1px solid #62727b;
-  background-color: grey;
-  border-radius: 2px;
+  border: 1px solid beige;
+  border-radius: 5px;
+  background-color: beige;
   text-decoration: none;
-  color: ghostwhite;
+  color: grey;
   text-align: center;
-  cursor: pointer; 
-  cursor: hand;
 }
 .nav-right {
   float: right;
 }
 .nav-link:hover {
-  background-color: #ffff5a;
-  border-color: #ffff5a;
-  color: black;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-/*.dice-toggled {
-  width: 100px;
-  background-color: #cdddf7;
-  border-radius: 3px;
-}*/
-
-.dice {
-font-weight: bold;
-margin: 5px;
-box-shadow: grey -1px 3px 10px;
-align-items: center;
-justify-content: center;
-display: flex;
-width: 60px;
-font-size: 30px;
-border-radius: 6px;
-height: 60px;
-background-color: black;
-color: #F5A623
+  background-color: darkcyan;
+  color: white;
+  border-color: darkcyan;
 }
 
 .dice-toggled {
-font-weight: bold;
-margin: 10px;
-box-shadow: grey -1px 3px 10px;
-align-items: center;
-justify-content: center;
-display: flex;
-width: 50px;
-font-size: 30px;
-border-radius: 2px;
-height: 50px;
-background-color: #BD0FE1;
-color: #F5A623
-}
-button {
-  cursor: pointer; 
-  cursor: hand;
+  width: 100px;
+  background-color: #cdddf7;
+  border-radius: 3px;
 }

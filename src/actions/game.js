@@ -4,7 +4,6 @@ import filter from 'lodash/filter';
 import market from '../Cards/cards';
 import { startListeningForUsers } from './users';
 import { marketListener } from './market.js';
-import { gameSettings } from '../initial-state';
 
 const startGameAction = gameData => ({
   type: 'UPDATE_GAME_DATA',
@@ -18,9 +17,9 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
       turnOrder: idx,
       kingOnTurnStart: false,
       stats: {
-        energy: gameSettings.initialEnergy,
-        health: gameSettings.initialHealth,
-        points: gameSettings.initialPoints,
+        energy: 0,
+        health: 10,
+        points: 0,
       },
       triggers: {
         coolAf: true,
@@ -28,7 +27,6 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
       hand: {
         test: 'test',
       },
-      character: 'none',
     });
     return [uid, playerObj];
   });
@@ -83,14 +81,14 @@ const setFirstPlayer = () => (dispatch, storeState) => {
   .then((playersArray) => {
     const gameSize = playersArray.val().length;
     const firstPlayerIdx = Math.floor(Math.random() * gameSize);
-
     game.child('/currentTurn').set(firstPlayerIdx);
     game.child('/gameSize').set(gameSize);
     return playersArray.val()[firstPlayerIdx];
   }).then((firstPlayer) => {
     game.child('/players').once('value')
     .then((players) => {
-      game.child('/chosenOne').set({ uid: players.val()[firstPlayer].uid, displayName: players.val()[firstPlayer].displayName, photoURL: players.val()[firstPlayer].photoURL });
+      // console.log('this is the players.val() first VAL', players.val());
+      game.child('/chosenOne').set({ uid: players.val()[firstPlayer].uid, displayName: players.val()[firstPlayer].displayName });
     });
   }).then(() => {
     game.child('started').set(true);
@@ -104,7 +102,7 @@ const initalizeOnGameStart = () => (dispatch, storeState) => {
   game.child('started').set(true);
   game.child('gid').set(gid);
   game.child('market').set(market);
-  game.child('/rollCount').set(gameSettings.initialRolls);
+  game.child('/rollCount').set(3);
   game.child('/king').set('none');
   game.child('/diceBox').set({
     one: { val: '?', selected: false },
@@ -113,8 +111,8 @@ const initalizeOnGameStart = () => (dispatch, storeState) => {
     four: { val: '?', selected: false },
     five: { val: '?', selected: false },
     six: { val: '?', selected: false },
-  });
-  game.child('messages').set([{ id: 'intialize the messages', text: '' }]);
+  },
+  );
 };
 
 
@@ -123,6 +121,7 @@ export const startListeningGameChanges = () => (dispatch, storeState) => {
   const game = database.ref(`games/${gid}`);
 
   game.on('value', (snapshot) => {
+    // console.log('Listening for changes on startListeningGameChanges', snapshot.val());
     dispatch(startGameAction(snapshot.val()));
   });
 };

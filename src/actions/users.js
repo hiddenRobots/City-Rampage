@@ -1,5 +1,6 @@
 import { database } from '../firebase';
 import { checkWin } from './checkWin';
+// import {bindActionCreators}
 
 export const addUser = user => ({
   type: 'ADD_USER',
