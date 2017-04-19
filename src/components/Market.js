@@ -34,14 +34,15 @@ class Market extends Component {
   render() {
     return (
       <div>
-        <div className="market-container">
+        <div className="market-container" style={{ justifyContent: 'center' }}>
+
           <div>
             <button
               id="reset-bttn"
               onClick={() => this.props.userResetMarket(this.props.user, this.props.chosenOne_uid)}
             >
               <div className="in-bttn">
-                <div>ResetCards</div>
+                <div>Refresh</div>
                 <div className="card-cost">
                   <div style={{ fontSize: '15px' }}> —2 </div>
                   <div><img className="cost-logo" src={energy} alt="E" /></div>
@@ -63,9 +64,7 @@ class Market extends Component {
             <div>{this.props.market.discarded.length} cards</div>
           </div>
 
-
         </div>
-
       </div>
     );
   }

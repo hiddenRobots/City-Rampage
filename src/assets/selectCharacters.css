@@ -1,0 +1,19 @@
+.char-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 200px;
+  border: 2px solid #ffff5a;
+  border-radius: 8px;
+  box-shadow: grey -1px 3px 12px; 
+  background: darkslategrey;
+  color: #ffff5a;
+  opacity: 0.9;
+}
+.char-div:hover {
+  background-color: lightgreen;
+  color: black;
+  font-weight: bold;
+}

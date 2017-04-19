@@ -9,8 +9,8 @@
   align-items: center;
   align-content: center;  
   margin: 10px;
-  background-color: lightblue;
-  border-radius: 10px;
+  background-color: #ffff72;
+  border-radius: 4px;
   width: 150px;
   height: 150px;
   box-shadow: grey -1px 3px 12px;
@@ -20,11 +20,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: slateblue;
+  background-color: darkslategrey;
   color: white;
 }
 .cards:hover {
-  background-color: lightseagreen;
+  background-color: lightyellow;
 }
 .card-cost {
   display: flex;
@@ -60,9 +60,7 @@
   justify-content: center space-around;
   align-items: center;
   background-color: orange;
-  border-radius: 5px;
-  border-bottom: 2px solid darkorange;
-  border-right: 2px solid darkorange;
+  border-radius: 4px;
   color: white;
   text-align: center;
   width: 75px;
@@ -73,10 +71,12 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-radius: 5px;
+  border-radius: 4px;
   height: 75px;
   width: 75px;
-  background-color: lightseagreen;
+  background-color: black;
+  font-weight: bold;
+  color: ghostwhite;
 }
 .in-bttn {
   display: flex;
@@ -89,7 +89,7 @@
   flex-direction: row;
 }
 #reset-bttn:hover {
-  background-color: lightgreen;
+  background-color: grey;
 }
 
 

@@ -1,5 +1,6 @@
 import shuffle from 'lodash/shuffle';
 import { database } from '../firebase';
+import { gameSettings } from '../initial-state';
 import fire from '../Cards/effects';
 
 function firebaseFix(obj) {
@@ -33,6 +34,7 @@ export const buyCard = (card, buyerId, chosenOneUid) => (dispatch, storeState) =
       const consumer = room.players[buyerId];
       market = room.market;
       firebaseFix(market);
+
       if (consumer.stats.energy >= card.cost) {
         consumer.stats.energy -= card.cost;
         market.face_up = market.face_up.filter(c => c.title !== card.title);
@@ -65,10 +67,12 @@ export const resetMarket = () => (dispatch, storeState) => {
     firebaseFix(market);
     market.face_up.forEach(card => market.discarded.push(card));
     market.face_up = [];
+
     for (let i = 0; i < 3; i++) {
       dealCard(market);
       regenDeckIfEmpty(market);
     }
+
     game.child('market').set(market)
     .then(() => dispatch({ type: 'DEAL_NEW_MARKET', payload: market }));
   });
@@ -76,8 +80,6 @@ export const resetMarket = () => (dispatch, storeState) => {
 
 // reset market reset with energy check
 export const userResetMarket = (userUid, chosenOneUid) => (dispatch, storeState) => {
-  // console.log('user and chosen', userUid, chosenOneUid);
-  console.log('user compare chosen', userUid === chosenOneUid);
   if (userUid === chosenOneUid) {
     const gid = storeState().auth.gid;
     const game = database.ref(`games/${gid}`);
@@ -85,15 +87,16 @@ export const userResetMarket = (userUid, chosenOneUid) => (dispatch, storeState)
     game.child('players').once('value', (players) => {
       const allPlayers = players.val();
       const player = allPlayers[userUid];
-      if (player.stats.energy >= 2) {
-        player.stats.energy -= 2;
+
+      if (player.stats.energy >= gameSettings.resetMarketCost) {
+        player.stats.energy -= gameSettings.resetMarketCost;
         dispatch(resetMarket());
       }
+
       game.child('players').set(allPlayers);
     });
   }
 };
-// end market reset with energy check
 
 export const marketListener = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;

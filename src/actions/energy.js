@@ -20,7 +20,6 @@ export const decreaseEnergy = uid => (dispatch, storeState) => {
   let energy;
   game.child(`players/${uid}`).once('value', (snapshot) => {
     energy = snapshot.val().stats.energy;
-    console.log(energy);
   });
   energy -= 1;
   game.child(`players/${uid}/stats/energy`).set(energy);

@@ -1,6 +1,6 @@
 import React from 'react';
 import Lobby from '../containers/LobbyContainer';
-
+import '../assets/gamesList.css';
 
 export default class GamesList extends React.Component {
   constructor(props) {
@@ -20,14 +20,25 @@ export default class GamesList extends React.Component {
       gid,
     });
   }
+
+  renderLobbyTiles() {
+    return (
+      <div className="lobby_tiles_container">
+        {this.props.gamesList.map(gameItem =>
+          <div className="lobby_tile" key={gameItem.gid}>
+            <div className="room_name">Room Name</div>
+            <div>{gameItem.name}</div>
+            <button onClick={() => { this.changeGid(gameItem.gid); this.props.joinGame(this.props.auth.uid, gameItem.gid); }}>JOIN GAME</button>
+          </div>)}
+      </div>
+    );
+  }
+
   render() {
+    // console.log(this.props);
     return (
       <div>
-        {this.props.gamesList.map(gameItem =>
-          <div style={{ border: '1px solid black', width: ' 200px' }} key={gameItem.gid}>
-            <p>{gameItem.gid}</p><p>{gameItem.name}</p>
-            <button onClick={() => { this.changeGid(gameItem.gid); this.props.joinGame(this.props.auth.uid, gameItem.gid); }}>join this game</button>
-          </div>)}
+        { this.renderLobbyTiles() }
 
         {this.state.gid !== '' && <Lobby gid={this.state.gid} />}
       </div>
