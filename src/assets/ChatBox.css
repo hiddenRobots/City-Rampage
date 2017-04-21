@@ -1,0 +1,45 @@
+.message {
+  border-radius:10px;
+  background-color: #fff;
+  padding: 5px;
+  margin: 5px;
+  box-shadow: grey -1px 3px 10px;
+  overflow-x: hidden;
+}
+
+.chat-box {
+  margin: 20px;
+  background-color: #e8eff4;
+  border-radius: 10px;
+  padding: 12px 15px 20px 20px;
+} 
+
+.chatboxButton {
+  height: 30px;
+  width: 100px;
+  background: #fff;
+  color: #6aa8d1;
+  border: 5px solid #6aa8d1;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.chatboxInput {
+  height: 20px;
+  font-size: 15px;
+  border-radius: 5px;
+  margin-left: 10px;
+  width: 70%; 
+}
+
+.messages {
+  width: 86%;
+  height: 150px; 
+  overflow: auto;
+  padding-left: 0px 15px;
+  background-color: #eff2f4;
+  border-radius: 10px;
+  margin-top: 15px;
+  font-size: 14px;
+}
