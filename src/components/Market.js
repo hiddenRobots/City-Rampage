@@ -60,7 +60,7 @@ class Market extends Component {
           { this.createMarket() }
 
           <div className="market-cards deck-disc">
-            <div>Discar Pile</div>
+            <div>Discard Pile</div>
             <div>{this.props.market.discarded ? this.props.market.discarded.length : 0} cards</div>
           </div>
 
