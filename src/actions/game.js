@@ -39,7 +39,7 @@ export const startGame = () => (dispatch, storeState) => {
   const playerArr = [];
   game.child('/playerPosition').once('value')
     .then((userIDS) => {
-      if (userIDS.val()) {
+      if (userIDS.val() && userIDS.val().length > gameSettings.minPlayers) {
         userIDS.val().map((userID, idx) => {
           playerArr.push(initializePlayer(userID, idx));
         });

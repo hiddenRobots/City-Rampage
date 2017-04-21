@@ -54,6 +54,7 @@ export const gameSettings = {
   initialRolls: 3,
   initialEnergy: 0,
   initialPoints: 0,
+  minPlayers: 1,
   maxPlayers: 5,
   resetMarketCost: 2,
 };

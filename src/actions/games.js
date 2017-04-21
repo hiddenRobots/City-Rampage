@@ -1,5 +1,5 @@
 import { database } from '../firebase';
-
+import { gameSettings } from '../initial-state';
 
 const updateGamesList = gamesList => ({
   type: 'UPDATE_GAMESLIST',
@@ -43,13 +43,15 @@ export const joinGame = (uid, gid) => (dispatch) => {
     game = database.ref(`games/${gameData.val().gid}`);
   }).then(() => {
     game.child('/playerPosition').once('value')
-
-      .then((PlayersInGame) => {
-        if (!PlayersInGame.val()) {
+      .then((playersInGame) => {
+        if (!playersInGame.val()) {
           game.child('/playerPosition').set([uid]);
-        } else if (PlayersInGame.val().indexOf(uid) === -1) {
-          const newPlayers = [...PlayersInGame.val(), uid];
+        } else if (playersInGame.val().indexOf(uid) === -1 && playersInGame.val().length < gameSettings.maxPlayers) {
+          const newPlayers = [...playersInGame.val(), uid];
           game.child('/playerPosition').set(newPlayers);
+        }
+        if (playersInGame.val().length < gameSettings.maxPlayers) {
+          // error handle
         }
       })
       .then(() => {
