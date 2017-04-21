@@ -2,7 +2,7 @@ import { gameSettings } from '../initial-state';
 
 const fire = {};
 
-// effects of cards with type = 'discard'
+// I. effects of cards with type = 'discard'
 fire.golden_goose = (consumer) => {
   consumer.stats.points += 2;
 };
@@ -98,20 +98,24 @@ fire.pax_romana = (consumer = null, { players, playerPosition }) => {
   }
 };
 
-// effects of cards with type = 'keep'
+// II. effects of cards with type = 'keep'
 
-// effect on dice submission
+// a. effect on dice submission
 fire.boost = (diceRoll) => {
-  diceRoll.attack.push('attack');
+  if (diceRoll.attack.length > 0) {
+    diceRoll.attack.push('attack');
+  }
 };
+
 fire.brain_growth = (diceRoll) => {
   diceRoll[1].push('1');
 };
+
 fire.singularity = (diceRoll) => {
   diceRoll[3].push('3');
 };
 
-// effect on end_turn (self-referential effects)
+// b. effect on end_turn (self-referential effects)
 fire.savant = () => {
   console.log('savant fired but not implemented!');
 };
