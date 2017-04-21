@@ -31,6 +31,8 @@ export const createNewGame = (name, numPlayers = 4) => (dispatch) => {
         { name: 'pekka', image: 'pekka', selected: false },
         { name: 'zombie', image: 'zombie', selected: false },
         { name: 'stewie', image: 'stewie', selected: false },
+        { name: 'cube', image: 'cube', selected: false },
+        { name: 'Lordofevil', image: 'Lordofevil', selected: false },
       ],
     });
   dispatch({ type: 'ADD_USER', type: 'user' });

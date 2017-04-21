@@ -10,6 +10,8 @@ import gollum from './assets/media/funMonsters/gollum.png';
 import pekka from './assets/media/funMonsters/pekka.png';
 import stewie from './assets/media/funMonsters/stewie.png';
 import zombie from './assets/media/funMonsters/zombie.png';
+import cube from './assets/media/funMonsters/cube.png';
+import Lordofevil from './assets/media/funMonsters/Lordofevil.png';
 
 export const charactersOBJ = {
   rick,
@@ -22,6 +24,8 @@ export const charactersOBJ = {
   pekka,
   stewie,
   zombie,
+  cube,
+  Lordofevil,
 };
 
 
