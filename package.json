@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "chai-enzyme": "^0.6.1",
     "istanbul": "^0.4.5",
     "react-scripts": "0.9.5"
   },

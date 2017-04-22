@@ -38,7 +38,7 @@ export default class GamesList extends React.Component {
     // console.log(this.props);
     return (
       <div>
-        { this.renderLobbyTiles() }
+        { this.state.gid === '' && this.renderLobbyTiles() }
 
         {this.state.gid !== '' && <Lobby gid={this.state.gid} />}
       </div>
