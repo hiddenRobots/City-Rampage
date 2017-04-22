@@ -108,11 +108,15 @@ fire.boost = (diceRoll) => {
 };
 
 fire.brain_growth = (diceRoll) => {
-  diceRoll[1].push('1');
+  if (diceRoll[1]) {
+    diceRoll[1].push('1');
+  }
 };
 
 fire.singularity = (diceRoll) => {
-  diceRoll[3].push('3');
+  if (diceRoll[3]) {
+    diceRoll[3].push('3');
+  }
 };
 
 // b. effect on end_turn (self-referential effects)

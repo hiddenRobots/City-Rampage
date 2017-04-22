@@ -121,7 +121,7 @@ const cards = [
   },
   {
     title: 'Singularity',
-    cost: 7,
+    cost: 9,
     type: 'Keep',
     ability: 'ADD A 3 TO YOUR DICE ON SUBMIT',
     effect: 'singularity',
