@@ -1,6 +1,6 @@
 # City Rampage
 
-City Rampage is a king-of-the-hill game originally designed for the browser. The game plays out fairly quickly, and provides many opportunities to push your luck in an attempt to be the victor. Inspired by Richard Garfield's KING OF TOKYO board game, our team has developed a web-app that allows users to join in a room with friends from around the world.
+City Rampage is a king-of-the-hill game originally designed for the browser. The game plays out fairly quickly, and provides many opportunities to push your luck in an attempt to be the victor. Inspired by Richard Garfield's KING OF TOKYO board game, our team has developed a web-app that allows users to play with friends from around the world.
 
 ## Getting Started
 
