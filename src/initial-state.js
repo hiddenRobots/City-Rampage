@@ -12,6 +12,8 @@ import stewie from './assets/media/funMonsters/stewie.png';
 import zombie from './assets/media/funMonsters/zombie.png';
 import cube from './assets/media/funMonsters/cube.png';
 import Lordofevil from './assets/media/funMonsters/Lordofevil.png';
+import Firebase from './assets/media/funMonsters/Firebase.png';
+import Aloak from './assets/media/funMonsters/Aloak.png';
 
 export const charactersOBJ = {
   rick,
@@ -26,6 +28,8 @@ export const charactersOBJ = {
   zombie,
   cube,
   Lordofevil,
+  Firebase,
+  Aloak
 };
 
 
