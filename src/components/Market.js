@@ -17,7 +17,7 @@ class Market extends Component {
       <div
         key={card.title}
         className="market-cards cards"
-        onClick={() => this.props.buyCard(card, this.props.user, this.props.chosenOne_uid)}
+        onClick={this.props.submitted ? () => this.props.buyCard(card, this.props.user, this.props.chosenOne_uid) : null}
       >
         <div className="card-cost">
           <div><img className="cost-logo" src={energy} alt="E" /></div>
@@ -39,7 +39,7 @@ class Market extends Component {
           <div>
             <button
               id="reset-bttn"
-              onClick={() => this.props.userResetMarket(this.props.user, this.props.chosenOne_uid)}
+              onClick={this.props.submitted ? () => this.props.userResetMarket(this.props.user, this.props.chosenOne_uid) : null}
             >
               <div className="in-bttn">
                 <div>Refresh</div>
@@ -61,7 +61,7 @@ class Market extends Component {
 
           <div className="market-cards deck-disc">
             <div>Discar Pile</div>
-            <div>{this.props.market.discarded.length} cards</div>
+            <div>{this.props.market.discarded ? this.props.market.discarded.length : 0} cards</div>
           </div>
 
         </div>

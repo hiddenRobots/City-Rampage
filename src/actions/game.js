@@ -25,9 +25,7 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
       triggers: {
         coolAf: true,
       },
-      hand: {
-        test: 'test',
-      },
+      hand: [],
       character: 'none',
     });
     return [uid, playerObj];

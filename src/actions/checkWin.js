@@ -37,6 +37,7 @@ export const killPlayer = uid => (dispatch, storeState) => {
       if (chosenOne.val().uid === uid) {
         newCurrentTurn = newPlayerPos.indexOf(chosenOne.val().uid) + 1;
         game.child('/currentTurn').set(newCurrentTurn);
+        // dispatch(endTurn);
       } else {
         newCurrentTurn = newPlayerPos.indexOf(chosenOne.val().uid);
         game.child('/currentTurn').set(newCurrentTurn);
@@ -44,7 +45,7 @@ export const killPlayer = uid => (dispatch, storeState) => {
       dispatch({ type: 'UPDATE_DEAD', payload: 'deadPlayers' });
 
       if (uid === king.val().uid) {
-        dispatch(endTurn());
+        game.child('king').set('none');
       }
 
       if (newPlayerPos.length === 1) {

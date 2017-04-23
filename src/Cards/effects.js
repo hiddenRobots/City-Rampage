@@ -11,6 +11,19 @@ fire.demolished_treasury = (consumer) => {
   consumer.stats.points += 3;
 };
 
+fire.blue_shell = (consumer, { players }) => {
+  let losing = { stats: { points: Infinity } };
+  let winning = { stats: { points: -Infinity } };
+  for (const key in players) {
+    if (players[key].stats.points < losing.stats.points) losing = players[key];
+    if (players[key].stats.points > winning.stats.points) winning = players[key];
+  }
+  if (winning.stats.points >= 2) {
+    losing.stats.points += 2;
+    winning.stats.points -= 2;
+  }
+};
+
 fire.gobbler = (consumer) => {
   consumer.stats.energy += 4;
 };
@@ -27,7 +40,7 @@ fire.triple_bird = (consumer) => {
   consumer.stats.health -= 3;
   consumer.stats.points += 3;
 };
-// heal cards need to max health at 10
+
 fire.heal = (consumer) => {
   const newHealth = Math.min(consumer.stats.health + 2, gameSettings.maxHealth);
   consumer.stats.health = newHealth;

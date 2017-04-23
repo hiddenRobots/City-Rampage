@@ -1,5 +1,30 @@
 import { database } from './firebase';
 
+import rick from './assets/media/funMonsters/rick.png';
+import cenaSmash from './assets/media/funMonsters/cenaSmash.png';
+import cyberKitty from './assets/media/funMonsters/cyberKitty.png';
+import gigazaur from './assets/media/funMonsters/gigazaur.png';
+import golfMeeseeks from './assets/media/funMonsters/golfMeeseeks.png';
+import kingDedede from './assets/media/funMonsters/kingDedede.png';
+import gollum from './assets/media/funMonsters/gollum.png';
+import pekka from './assets/media/funMonsters/pekka.png';
+import stewie from './assets/media/funMonsters/stewie.png';
+import zombie from './assets/media/funMonsters/zombie.png';
+
+export const charactersOBJ = {
+  rick,
+  cenaSmash,
+  cyberKitty,
+  gigazaur,
+  golfMeeseeks,
+  kingDedede,
+  gollum,
+  pekka,
+  stewie,
+  zombie,
+};
+
+
 const initialState = {
   auth: {
     status: 'ANONYMOUS',

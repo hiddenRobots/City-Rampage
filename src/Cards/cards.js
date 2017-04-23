@@ -2,8 +2,13 @@ import shuffle from 'lodash/shuffle';
 
 const cards = [
   // bellow are cards with type='discard'
-  // note: these cards do not need a 'window' key
-  // since their effect is immediately applied after being bought
+  {
+    title: 'Blue Shell',
+    cost: 5,
+    type: 'Discard',
+    ability: 'LOSING PLYR +2 PTS & WINNING PLYR —2 PTS',
+    effect: 'blue_shell',
+  },
   {
     title: 'Golden Goose',
     cost: 4,
@@ -22,7 +27,7 @@ const cards = [
     title: 'Kamikaze',
     cost: 4,
     type: 'Discard',
-    ability: 'Take 3 DMG, DEAL 2 DMG TO ALL OTHER PLAYERS',
+    ability: 'TAKE 3 DMG, DEAL 2 DMG TO ALL OTHER PLAYERS',
     effect: 'kamikaze',
   },
   {
@@ -92,7 +97,7 @@ const cards = [
     title: 'Triple Bird',
     cost: 5,
     type: 'Discard',
-    ability: '-3 HEALTH & +3 PTS',
+    ability: '—3 HEALTH & +3 PTS',
     effect: 'triple_bird',
   },
   // bellow are cards with type='keep'
@@ -108,7 +113,7 @@ const cards = [
     title: 'Shield',
     cost: 4,
     type: 'Keep',
-    ability: 'ALL DMG TO YOU -1',
+    ability: 'ALL DMG TO YOU —1',
     effect: 'shield',
     window: 'dice',
   },
@@ -140,7 +145,7 @@ const cards = [
     title: 'Symbiosis X',
     cost: 3,
     type: 'Keep',
-    ability: 'End turn: -1 HEALTH, +2 ENERGY',
+    ability: 'ON END TURN: -1 HEALTH, +2 ENERGY',
     effect: 'symbiosis_x',
     window: 'end_turn',
   },
@@ -148,7 +153,7 @@ const cards = [
     title: 'Symbiosis Z',
     cost: 3,
     type: 'Keep',
-    ability: 'End turn: -2 ENERGY, +1 HEALTH',
+    ability: 'ON END TURN: -2 ENERGY, +1 HEALTH',
     effect: 'symbiosis_z',
     window: 'end_turn',
   },
@@ -156,7 +161,7 @@ const cards = [
     title: 'Symbiosis Super',
     cost: 4,
     type: 'Keep',
-    ability: 'End turn: -2 ENERGY, +1 POINT',
+    ability: 'ON END TURN: -2 ENERGY, +1 POINT',
     effect: 'symbiosis_super',
     window: 'end_turn',
   },

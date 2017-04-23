@@ -1,0 +1,19 @@
+.chosenOne {
+  background-color:#F0F7FF;  
+  box-shadow:0 0 40px 20px purple; 
+  animation: changeShadow 2s infinite;
+}
+
+.notChosenOne {
+  background-color: #d7dce2;
+  box-shadow: grey -1px 3px 12px,
+}  
+
+@keyframes changeShadow{
+
+
+  0% {box-shadow: 0px 0px 20px 4px #F1C516}
+  60% {box-shadow: 0px 0px 20px 8px #F1C516}
+  100% {box-shadow: 0px 0px 20px 4px #F1C516}
+
+}

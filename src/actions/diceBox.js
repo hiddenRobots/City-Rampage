@@ -68,12 +68,14 @@ export const rollDice = (uid, chosenId) => (dispatch, storeState) => {
           }
         }
         // Promise.all(pArray)
-      }).then(() => {
+      })
+      .then(() => {
         game.child('/diceBox').once('value').then((updatedDice) => {
           dispatch(updateRolls(updatedDice.val()));
           dispatch(decrementRoll());
         });
-      }).then(() => {
+      })
+      .then(() => {
         if (rollCount.val() === 1) {
           dispatch(submitRoll());
         }
@@ -197,12 +199,13 @@ export const endTurn = () => (dispatch, storeState) => {
       const allPlayers = players.val();
       const cardOwner = allPlayers[chosenOne.val().uid];
 
-      cardOwner.hand.forEach((card) => {
+
+      cardOwner.hand ? cardOwner.hand.forEach((card) => {
         if (card.window === 'end_turn') {
           fire[card.effect](cardOwner);
         }
         game.child('players').set(allPlayers);
-      });
+      }) : null;
     });
   });
   // end: end_turn card effects
