@@ -1,17 +1,19 @@
 import React from 'react';
+import '../assets/kickKing.css';
 
 export default class KickKing extends React.Component {
   render() {
-    // console.log('kick king props', this.props);
+    console.log('KICK KING PROPS', this.props);
     return (
-      <div>
-
-        <div>
-        You are being attack do you want to leave the city?
-        <button onClick={() => this.props.setKing()}>Yes</button>
-          <button onClick={() => this.props.stayOnHill()}>No</button>
+      <div className="king-options-container">
+        <div className="king-text">
+          <div>YOU WERE ATTACKED</div>
+          <div>STAY IN THE CITY?</div>
         </div>
-
+        <div className="king-bttns">
+          <div className="king-bttn-yes" onClick={() => this.props.stayOnHill()}>YES</div>
+          <div className="king-bttn-no" onClick={() => this.props.setKing()}>NO</div>
+        </div>
       </div>
     );
   }

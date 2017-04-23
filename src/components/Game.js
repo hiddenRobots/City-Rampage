@@ -7,21 +7,7 @@ import ChatBox from '../containers/ChatBoxContainer';
 import '../assets/Game.css';
 
 import map from '../assets/media/sf-map.png';
-import rick from '../assets/media/funMonsters/rick.png';
-import cenaSmash from '../assets/media/funMonsters/cenaSmash.png';
-import cyberKitty from '../assets/media/funMonsters/cyberKitty.png';
-import gigazaur from '../assets/media/funMonsters/gigazaur.png';
-import golfMeeseeks from '../assets/media/funMonsters/golfMeeseeks.png';
-import kingDedede from '../assets/media/funMonsters/kingDedede.png';
-
-const charactersOBJ = {
-  rick,
-  cenaSmash,
-  cyberKitty,
-  gigazaur,
-  golfMeeseeks,
-  kingDedede,
-};
+import { charactersOBJ } from '../initial-state';
 
 
 export default class Game extends React.Component {

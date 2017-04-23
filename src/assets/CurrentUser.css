@@ -1,0 +1,9 @@
+.chosenOne {
+  background-color:grey;  
+  box-shadow:0 0 40px purple; 
+}
+
+.notChosenOne {
+  background-color: #F0F7FF;
+  box-shadow: grey -1px 3px 12px,
+}  

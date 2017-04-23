@@ -1,5 +1,22 @@
 import { database } from './firebase';
 
+import rick from './assets/media/funMonsters/rick.png';
+import cenaSmash from './assets/media/funMonsters/cenaSmash.png';
+import cyberKitty from './assets/media/funMonsters/cyberKitty.png';
+import gigazaur from './assets/media/funMonsters/gigazaur.png';
+import golfMeeseeks from './assets/media/funMonsters/golfMeeseeks.png';
+import kingDedede from './assets/media/funMonsters/kingDedede.png';
+
+export const charactersOBJ = {
+  rick,
+  cenaSmash,
+  cyberKitty,
+  gigazaur,
+  golfMeeseeks,
+  kingDedede,
+};
+
+
 const initialState = {
   auth: {
     status: 'ANONYMOUS',
