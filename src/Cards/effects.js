@@ -2,13 +2,26 @@ import { gameSettings } from '../initial-state';
 
 const fire = {};
 
-// effects of cards with type = 'discard'
+// I. effects of cards with type = 'discard'
 fire.golden_goose = (consumer) => {
   consumer.stats.points += 2;
 };
 
 fire.demolished_treasury = (consumer) => {
   consumer.stats.points += 3;
+};
+
+fire.blue_shell = (consumer, { players }) => {
+  let losing = { stats: { points: Infinity } };
+  let winning = { stats: { points: -Infinity } };
+  for (const key in players) {
+    if (players[key].stats.points < losing.stats.points) losing = players[key];
+    if (players[key].stats.points > winning.stats.points) winning = players[key];
+  }
+  if (winning.stats.points >= 2) {
+    losing.stats.points += 2;
+    winning.stats.points -= 2;
+  }
 };
 
 fire.gobbler = (consumer) => {
@@ -27,7 +40,7 @@ fire.triple_bird = (consumer) => {
   consumer.stats.health -= 3;
   consumer.stats.points += 3;
 };
-// heal cards need to max health at 10
+
 fire.heal = (consumer) => {
   const newHealth = Math.min(consumer.stats.health + 2, gameSettings.maxHealth);
   consumer.stats.health = newHealth;
@@ -85,29 +98,40 @@ fire.pax_romana = (consumer = null, { players, playerPosition }) => {
   }
 };
 
-// effects of cards with type = 'keep'
+// II. effects of cards with type = 'keep'
 
-// effect on dice submission
-fire.boost = () => {
-  console.log('roar fired but not implemented!');
-};
-fire.shield = () => {
-  console.log('savant fired but not implemented!');
-};
-fire.brain_growth = () => {
-  console.log('brain_growth fired but not implemented!');
-};
-fire.singularity = () => {
-  console.log('singularity fired but not implemented!');
+// a. effect on dice submission
+fire.boost = (diceRoll) => {
+  if (diceRoll.attack.length > 0) {
+    diceRoll.attack.push('attack');
+  }
 };
 
-// effect on end_turn (self-referential effects)
-fire.savant = () => {
-  console.log('savant fired but not implemented!');
+fire.brain_growth = (diceRoll) => {
+  if (diceRoll[1]) {
+    diceRoll[1].push('1');
+  }
+};
+
+fire.singularity = (diceRoll) => {
+  if (diceRoll[3]) {
+    diceRoll[3].push('3');
+  }
+};
+
+// b. effect on end_turn (self-referential effects)
+fire.savant = (consumer, game) => {
+  game.savant = true;
+};
+
+fire.aura = (consumer) => {
+  if (consumer.stats.health < 10) {
+    consumer.stats.health += 1;
+  }
 };
 
 fire.symbiosis_x = (consumer) => {
-  if (consumer.health > 0) {
+  if (consumer.stats.health > 0) {
     consumer.stats.health -= 1;
     consumer.stats.energy += 2;
   }

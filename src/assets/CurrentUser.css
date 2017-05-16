@@ -1,0 +1,31 @@
+.chosenOne {
+  background-color:#F0F7FF;  
+  box-shadow:0 0 40px 20px purple; 
+  animation: changeShadow 2s infinite;
+}
+
+.notChosenOne {
+  background-color: #d7dce2;
+  box-shadow: grey -1px 3px 12px,
+}  
+
+@keyframes changeShadow {
+  0% {box-shadow: 0px 0px 20px 4px #4990E2}
+  60% {box-shadow: 0px 0px 20px 8px #4990E2}
+  100% {box-shadow: 0px 0px 20px 4px #4990E2}
+}
+
+.tip{
+  border-radius: 5px;
+    width: 550px;
+    background-color: #A4F0DF;
+    align-self: center;
+    display: flex;
+    text-align: center;
+    flex: 1;
+    flex-direction: column;
+    margin: 10px;
+    margin-bottom: 15px;
+    padding: 9px;
+    box-shadow: grey -1px 3px 10px;
+}

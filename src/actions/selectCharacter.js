@@ -5,8 +5,6 @@ export const selectCharacter = (uid, character, index) => (dispatch, storeState)
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
 
-  console.log('this is the uid of the player who wants to pick', uid, character);
-
   game.child(`/players/${uid}/character`).once('value')
   .then((currentCharacter) => {
     if (currentCharacter.val() === 'none') {

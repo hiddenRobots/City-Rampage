@@ -1,5 +1,38 @@
 import { database } from './firebase';
 
+import rick from './assets/media/funMonsters/rick.png';
+import cenaSmash from './assets/media/funMonsters/cenaSmash.png';
+import cyberKitty from './assets/media/funMonsters/cyberKitty.png';
+import gigazaur from './assets/media/funMonsters/gigazaur.png';
+import golfMeeseeks from './assets/media/funMonsters/golfMeeseeks.png';
+import kingDedede from './assets/media/funMonsters/kingDedede.png';
+import gollum from './assets/media/funMonsters/gollum.png';
+import pekka from './assets/media/funMonsters/pekka.png';
+import stewie from './assets/media/funMonsters/stewie.png';
+import zombie from './assets/media/funMonsters/zombie.png';
+import cube from './assets/media/funMonsters/cube.png';
+import Lordofevil from './assets/media/funMonsters/Lordofevil.png';
+import Aloak from './assets/media/funMonsters/Aloak.png';
+import Firebase from './assets/media/funMonsters/Firebase.png';
+
+export const charactersOBJ = {
+  rick,
+  cenaSmash,
+  cyberKitty,
+  gigazaur,
+  golfMeeseeks,
+  kingDedede,
+  gollum,
+  pekka,
+  stewie,
+  zombie,
+  cube,
+  Lordofevil,
+  Aloak,
+  Firebase,
+};
+
+
 const initialState = {
   auth: {
     status: 'ANONYMOUS',
@@ -29,6 +62,7 @@ export const gameSettings = {
   initialRolls: 3,
   initialEnergy: 0,
   initialPoints: 0,
+  minPlayers: 1,
   maxPlayers: 5,
   resetMarketCost: 2,
 };

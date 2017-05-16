@@ -9,6 +9,7 @@ function mapStateToProps(state) {
     market: state.market,
     user: state.auth.uid,
     chosenOne_uid: state.game.chosenOne.uid,
+    submitted: state.game.submitted,
   };
 }
 

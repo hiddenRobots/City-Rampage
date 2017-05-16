@@ -6,26 +6,20 @@ const setPlayersInLobby = array => ({
 });
 
 
-export const playersInLobby = gid => (dispatch) => {
-  const game = database.ref(`games/${gid}`);
-
-  game.child('/playerPosition').once('value').then((playerList) => {
+export const playersInLobby = game => (dispatch) => {
+  if (game && game.playerPosition) {
+    const playerList = game.playerPosition;
     const userList = [];
-    playerList.val().forEach((uid) => {
+
+    playerList.forEach((uid) => {
       userList.push(database.ref(`users/${uid}`).once('value'));
     });
     Promise.all(userList)
     .then((resolvedUserList) => {
-      const userNameList = resolvedUserList.map(user => user.val().displayName);
+      const userNameList = resolvedUserList.map((user) => [user.val().displayName, user.val().photoURL]);
       return userNameList;
     })
     .then(userNameList => dispatch(setPlayersInLobby(userNameList)));
-  })
-  // this is gonne be jenky as crap but whatevs
-  .then(() => {
-    game.child('started').once('value')
-    .then((started) => {
-      started.val() ? null : setTimeout(() => { dispatch(playersInLobby(gid)); }, 2000);
-    });
-  });
+  }
 };
+

@@ -13,16 +13,3 @@ export default function (state = [], action) {
   }
 }
 
-
-// export const showOnlineUsers = () => {
-//   const array = [];
-//   console.log();
-//   game.child('/players').on('value', (snapshot) => {
-//     for (const i in snapshot.val()) {
-//       array.push(snapshot.val()[i]);
-//     }
-//   });
-
-//   // console.log(array);
-//   return array;
-// };

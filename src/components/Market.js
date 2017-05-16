@@ -17,7 +17,7 @@ class Market extends Component {
       <div
         key={card.title}
         className="market-cards cards"
-        onClick={() => this.props.buyCard(card, this.props.user, this.props.chosenOne_uid)}
+        onClick={this.props.submitted ? () => this.props.buyCard(card, this.props.user, this.props.chosenOne_uid) : null}
       >
         <div className="card-cost">
           <div><img className="cost-logo" src={energy} alt="E" /></div>
@@ -36,33 +36,41 @@ class Market extends Component {
       <div>
         <div className="market-container" style={{ justifyContent: 'center' }}>
 
-          <div>
-            <button
+          <div
+            style={{ marginRight: '10px',
+              alignContent: 'center',
+              alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <div
+              style={{
+                margin: '5px', textAlign: 'center', fontWeight: 'bold',
+              }}
+            >DECK - {this.props.market.deck.length} </div>
+            <div
               id="reset-bttn"
-              onClick={() => this.props.userResetMarket(this.props.user, this.props.chosenOne_uid)}
+              onClick={this.props.submitted ? () => this.props.userResetMarket(this.props.user, this.props.chosenOne_uid) : null}
             >
               <div className="in-bttn">
-                <div>Refresh</div>
                 <div className="card-cost">
-                  <div style={{ fontSize: '15px' }}> —2 </div>
+                  <div style={{ fontSize: '20px', marginLeft: '8px' }}> 2 </div>
                   <div><img className="cost-logo" src={energy} alt="E" /></div>
                 </div>
+                <div className="wipe">WIPE DECK</div>
               </div>
-            </button>
+            </div>
+            <div
+              style={{
+                margin: '5px', textAlign: 'center', fontWeight: 'bold',
+              }}
+            >DISCARD - {this.props.market.discarded ? this.props.market.discarded.length : 0} </div>
           </div>
           <br />
 
-          <div className="market-cards deck-disc">
-            <div>Deck</div>
-            <div>{this.props.market.deck.length} cards</div>
-          </div>
-
           { this.createMarket() }
 
-          <div className="market-cards deck-disc">
-            <div>Discar Pile</div>
-            <div>{this.props.market.discarded.length} cards</div>
-          </div>
 
         </div>
       </div>

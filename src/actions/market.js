@@ -3,24 +3,24 @@ import { database } from '../firebase';
 import { gameSettings } from '../initial-state';
 import fire from '../Cards/effects';
 
-function firebaseFix(obj) {
+export const firebaseFix = (obj) => {
   obj.deck = obj.deck || [];
   obj.face_up = obj.face_up || [];
   obj.discarded = obj.discarded || [];
-}
+};
 
-function regenDeckIfEmpty(obj) {
+export const regenDeckIfEmpty = (obj) => {
   if (!obj.deck || obj.deck.length === 0) {
     obj.deck = [];
     obj.deck = shuffle(obj.discarded);
     obj.discarded = [];
   }
-}
+};
 
-function dealCard(obj) {
+export const dealCard = (obj) => {
   obj.face_up.push(obj.deck[0]);
   obj.deck.shift();
-}
+};
 
 export const buyCard = (card, buyerId, chosenOneUid) => (dispatch, storeState) => {
   if (buyerId === chosenOneUid) {
@@ -52,7 +52,8 @@ export const buyCard = (card, buyerId, chosenOneUid) => (dispatch, storeState) =
         regenDeckIfEmpty(market);
       }
       game.child('market').set(market)
-    .then(() => game.child('players').set(room.players));
+      .then(() => game.child('players').set(room.players))
+      .then(() => game.child('savant').set(room.savant));
     })
   .then(() => dispatch({ type: 'DEAL_CARD', payload: market }));
   }

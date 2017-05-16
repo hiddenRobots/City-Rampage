@@ -3,17 +3,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 200px;
-  width: 200px;
-  border: 2px solid #ffff5a;
+  height: 170px;
+  width: 170px;
+  /*border: 2px solid #ffff5a;*/
   border-radius: 8px;
   box-shadow: grey -1px 3px 12px; 
-  background: darkslategrey;
-  color: #ffff5a;
-  opacity: 0.9;
+  background: white;
+  color: black; 
+  margin: 5px 
 }
 .char-div:hover {
-  background-color: lightgreen;
-  color: black;
+  background-color: #4990E2;
+  color: white;
   font-weight: bold;
+  cursor: pointer;
 }

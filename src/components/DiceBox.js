@@ -5,6 +5,7 @@ import bangYellow from '../assets/media/bang_yellow.png';
 import energyYellow from '../assets/media/energy.png';
 import healthYellow from '../assets/media/heart_yellow.png';
 import powerSVG from '../assets/media/power-svg.svg';
+
 class DiceBox extends Component {
 
   showIcon(val) {
@@ -22,24 +23,29 @@ class DiceBox extends Component {
 
   showSubmit() {
     const rolled = this.props.diceBox.one.val;
+    const roller_uid = this.props.auth.uid;
+    const roller = this.props.game.players[roller_uid];
 
     return (rolled !== '?' && this.props.auth.uid === this.props.game.chosenOne.uid) ?
-      <div style={{ display: 'flex', flex: 0.5, width: '80px', backgroundColor: '#73C217', alignItems: 'center', justifyContent: 'center', borderRadius: '6px', boxShadow: 'grey -1px 3px 10px', marginTop: '7px' }}>
-        <div style={{ flex: 1, textAlign: 'center', color: 'white', fontSize: '13px', alignSelf: 'center', alignItems: 'center' }} onClick={this.props.game.submitted ? null : () => { this.props.submitRoll(); }}>{this.props.game.submitted ? ' SUBMITTED' : 'SUBMIT'}</div>
+      <div style={{ display: 'flex', flex: 0.5, width: '80px', backgroundColor: '#73C217', alignItems: 'center', justifyContent: 'center', borderRadius: '6px', boxShadow: 'grey -1px 3px 10px', marginTop: '7px', cursor: 'pointer' }}>
+        <div style={{ flex: 1, textAlign: 'center', color: 'white', fontSize: '13px', alignSelf: 'center', alignItems: 'center' }} onClick={this.props.game.submitted ? null : () => { this.props.submitRoll(roller); }}>{this.props.game.submitted ? ' SUBMITTED' : 'SUBMIT'}</div>
       </div>
               : <div style={{ display: 'flex', flex: 0.5, width: '80px', backgroundColor: 'transparent' }} />;
   }
 
   showRollCount() {
+    const roller_uid = this.props.auth.uid;
+    const roller = this.props.game.players[roller_uid];
+
     return !(this.props.game.chosenOne && this.props.game.chosenOne.uid === this.props.auth.uid && this.props.game.submitted && !this.props.game.kingAttackedOnTurn) &&
-            (<div onClick={() => { this.props.rollDice(this.props.auth.uid, this.props.game.chosenOne.uid); }} style={{ display: 'flex', flex: 1, flexDirection: 'column', marginBottom: '6px', width: '80px', backgroundColor: '#4990E2', alignItems: 'center', justifyContent: 'center', borderRadius: '6px', boxShadow: 'grey -1px 3px 10px' }}>
+            (<div onClick={() => { this.props.rollDice(this.props.auth.uid, this.props.game.chosenOne.uid, roller); }} style={{ display: 'flex', flex: 1, flexDirection: 'column', marginBottom: '6px', width: '80px', backgroundColor: '#4990E2', alignItems: 'center', justifyContent: 'center', borderRadius: '6px', boxShadow: 'grey -1px 3px 10px', cursor: 'pointer' }}>
               <div style={{ textAlign: 'center', color: 'white', fontSize: '36px', fontWeight: 'bold' }}>{this.props.game.rollCount}</div>
               <div style={{ textAlign: 'center', color: 'white', fontSize: '16px' }} >ROLL</div>
             </div>);
   }
 
   endYourTurn() {
-    return <button style={{ backgroundColor: 'red', border: '1px solid red', borderRadius: '8px', color: 'white', fontSize: '16px', width: '70px', height: '60px', boxShadow: 'grey -1px 3px 10px' }} onClick={() => { this.props.endTurn(); }}> END TURN</button>;
+    return <button style={{ backgroundColor: 'red', border: '1px solid red', borderRadius: '8px', color: 'white', fontSize: '16px', width: '70px', height: '60px', boxShadow: 'grey -1px 3px 10px', cursor: 'pointer' }} onClick={() => { this.props.endTurn(); }}> END TURN</button>;
   }
 
 

@@ -2,8 +2,13 @@ import shuffle from 'lodash/shuffle';
 
 const cards = [
   // bellow are cards with type='discard'
-  // note: these cards do not need a 'window' key
-  // since their effect is immediately applied after being bought
+  {
+    title: 'Blue Shell',
+    cost: 5,
+    type: 'Discard',
+    ability: 'LOSING PLYR +2 PTS & WINNING PLYR —2 PTS',
+    effect: 'blue_shell',
+  },
   {
     title: 'Golden Goose',
     cost: 4,
@@ -22,12 +27,12 @@ const cards = [
     title: 'Kamikaze',
     cost: 4,
     type: 'Discard',
-    ability: 'Take 3 DMG, DEAL 2 DMG TO ALL OTHER PLAYERS',
+    ability: 'TAKE 3 DMG, DEAL 2 DMG TO ALL OTHER PLAYERS',
     effect: 'kamikaze',
   },
   {
     title: 'Quake',
-    cost: 3,
+    cost: 4,
     type: 'Discard',
     ability: 'DEAL 1 DMG TO ALL OTHER PLAYERS',
     effect: 'quake',
@@ -62,7 +67,7 @@ const cards = [
   },
   {
     title: 'Heal',
-    cost: 2,
+    cost: 3,
     type: 'Discard',
     ability: 'GAIN 2 HEALTH',
     effect: 'heal',
@@ -92,24 +97,18 @@ const cards = [
     title: 'Triple Bird',
     cost: 5,
     type: 'Discard',
-    ability: '-3 HEALTH & +3 PTS',
+    ability: '—3 HEALTH & +3 PTS',
     effect: 'triple_bird',
   },
   // bellow are cards with type='keep'
+
+  // start: window = dice
   {
     title: 'Boost!',
-    cost: 3,
+    cost: 5,
     type: 'Keep',
     ability: 'DEAL +1 WHEN ATTACKING',
     effect: 'boost',
-    window: 'dice',
-  },
-  {
-    title: 'Shield',
-    cost: 4,
-    type: 'Keep',
-    ability: 'ALL DMG TO YOU -1',
-    effect: 'shield',
     window: 'dice',
   },
   {
@@ -122,12 +121,14 @@ const cards = [
   },
   {
     title: 'Singularity',
-    cost: 7,
+    cost: 9,
     type: 'Keep',
     ability: 'ADD A 3 TO YOUR DICE ON SUBMIT',
-    effect: 'brain_growth',
+    effect: 'singularity',
     window: 'dice',
   },
+  // end: window = dice
+
   // effect on end turn
   {
     title: 'Savant',
@@ -137,10 +138,18 @@ const cards = [
     effect: 'savant',
   },
   {
+    title: 'Aura',
+    cost: 9,
+    type: 'Keep',
+    ability: 'ON END TURN: +1 HEALTH',
+    effect: 'aura',
+    window: 'end_turn',
+  },
+  {
     title: 'Symbiosis X',
     cost: 3,
     type: 'Keep',
-    ability: 'End turn: -1 HEALTH, +2 ENERGY',
+    ability: 'ON END TURN: -1 HEALTH, +2 ENERGY',
     effect: 'symbiosis_x',
     window: 'end_turn',
   },
@@ -148,7 +157,7 @@ const cards = [
     title: 'Symbiosis Z',
     cost: 3,
     type: 'Keep',
-    ability: 'End turn: -2 ENERGY, +1 HEALTH',
+    ability: 'ON END TURN: -2 ENERGY, +1 HEALTH',
     effect: 'symbiosis_z',
     window: 'end_turn',
   },
@@ -156,10 +165,11 @@ const cards = [
     title: 'Symbiosis Super',
     cost: 4,
     type: 'Keep',
-    ability: 'End turn: -2 ENERGY, +1 POINT',
+    ability: 'ON END TURN: -2 ENERGY, +1 POINT',
     effect: 'symbiosis_super',
     window: 'end_turn',
   },
+  // end: effect on end turn
 ];
 
 const market = {

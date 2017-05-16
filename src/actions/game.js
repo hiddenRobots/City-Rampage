@@ -5,6 +5,7 @@ import market from '../Cards/cards';
 import { startListeningForUsers } from './users';
 import { marketListener } from './market.js';
 import { gameSettings } from '../initial-state';
+import { playersInLobby } from './lobby';
 
 const startGameAction = gameData => ({
   type: 'UPDATE_GAME_DATA',
@@ -25,9 +26,7 @@ const initializePlayer = (uid, idx) => database.ref(`/users/${uid}`).once('value
       triggers: {
         coolAf: true,
       },
-      hand: {
-        test: 'test',
-      },
+      hand: [],
       character: 'none',
     });
     return [uid, playerObj];
@@ -41,7 +40,7 @@ export const startGame = () => (dispatch, storeState) => {
   const playerArr = [];
   game.child('/playerPosition').once('value')
     .then((userIDS) => {
-      if (userIDS.val()) {
+      if (userIDS.val() && userIDS.val().length >= gameSettings.minPlayers) {
         userIDS.val().map((userID, idx) => {
           playerArr.push(initializePlayer(userID, idx));
         });
@@ -124,5 +123,6 @@ export const startListeningGameChanges = () => (dispatch, storeState) => {
 
   game.on('value', (snapshot) => {
     dispatch(startGameAction(snapshot.val()));
+    dispatch(playersInLobby(snapshot.val()));
   });
 };

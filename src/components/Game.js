@@ -7,21 +7,7 @@ import ChatBox from '../containers/ChatBoxContainer';
 import '../assets/Game.css';
 
 import map from '../assets/media/sf-map.png';
-import rick from '../assets/media/funMonsters/rick.png';
-import cenaSmash from '../assets/media/funMonsters/cenaSmash.png';
-import cyberKitty from '../assets/media/funMonsters/cyberKitty.png';
-import gigazaur from '../assets/media/funMonsters/gigazaur.png';
-import golfMeeseeks from '../assets/media/funMonsters/golfMeeseeks.png';
-import kingDedede from '../assets/media/funMonsters/kingDedede.png';
-
-const charactersOBJ = {
-  rick,
-  cenaSmash,
-  cyberKitty,
-  gigazaur,
-  golfMeeseeks,
-  kingDedede,
-};
+import { charactersOBJ } from '../initial-state';
 
 
 export default class Game extends React.Component {
@@ -57,14 +43,10 @@ export default class Game extends React.Component {
   }
 
   render() {
-    // console.log('Game Component', this.props, this.props.game.chosenOne !== this.props.auth.uid);
-    console.log(this.props.game);
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-
         <div style={{ position: 'relative', flex: 1, display: 'flex', alignContent: 'center', justifyContent: 'center' }}>
-
-          <img style={{ display: 'flex', flex: 1, height: '190px', borderRadius: '8px', alignItems: 'center' }} src={map} />
+          <img style={{ display: 'flex', flex: 1, height: '190px', alignItems: 'center', marginTop: '-5px', zIndex: -1 }} src={map} />
 
           { this.props.game.king.uid && <div
             style={{
@@ -92,10 +74,9 @@ export default class Game extends React.Component {
 
 
         <Market />
-        {this.checkKing() && <KickKing />}
 
         <CurrentUser auth={this.props.auth} />
-        <ChatBox />
+        {/* <ChatBox />*/}
         {/* <DiceBox auth={this.props.auth} />*/}
 
 

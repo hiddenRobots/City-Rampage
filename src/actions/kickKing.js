@@ -6,8 +6,6 @@ export const setKing = () => (dispatch, storeState) => {
   const gid = storeState().auth.gid;
   const game = database.ref(`games/${gid}`);
 
-
-  console.log('setKIGN indfakdshlkfjashdlkjfh;');
   function setNewKing() {
     game.child('/chosenOne').once('value')
     .then((currentPlayer) => {
@@ -27,7 +25,6 @@ export const setKing = () => (dispatch, storeState) => {
       .then((chosenOne) => {
         game.child(`/players/${chosenOne.val().uid}`).once('value')
         .then((currentPlayer) => {
-          console.log(currentPlayer.val(), 'shit poop');
           game.child('chosenOne').set({ uid: currentPlayer.val().uid, displayName: currentPlayer.val().displayName, photoURL: currentPlayer.val().photoURL, character: currentPlayer.val().character })
         .then(() => setNewKing());
         });
